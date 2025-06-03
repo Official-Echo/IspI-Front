@@ -2,24 +2,98 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_announcements_layout from "./routes/(announcements)/_layout.tsx";
+import * as $_announcements_middleware from "./routes/(announcements)/_middleware.ts";
+import * as $_announcements_announcements from "./routes/(announcements)/announcements.tsx";
+import * as $_announcements_announcements_id_ from "./routes/(announcements)/announcements/[id].tsx";
+import * as $_database_layout from "./routes/(database)/_layout.tsx";
+import * as $_database_database_id_ from "./routes/(database)/database/[id].tsx";
+import * as $_database_database_index from "./routes/(database)/database/index.tsx";
 import * as $_404 from "./routes/_404.tsx";
-import * as $_app from "./routes/_app.tsx";
-import * as $api_joke from "./routes/api/joke.ts";
-import * as $greet_name_ from "./routes/greet/[name].tsx";
+import * as $_layout from "./routes/_layout.tsx";
+import * as $_middleware from "./routes/_middleware.ts";
+import * as $cabinet_layout from "./routes/cabinet/_layout.tsx";
+import * as $cabinet_middleware from "./routes/cabinet/_middleware.ts";
+import * as $cabinet_announcement_violations from "./routes/cabinet/announcement-violations.tsx";
+import * as $cabinet_announcements from "./routes/cabinet/announcements.tsx";
+import * as $cabinet_complaints from "./routes/cabinet/complaints.tsx";
+import * as $cabinet_deals_id_ from "./routes/cabinet/deals/[id].tsx";
+import * as $cabinet_deals_index from "./routes/cabinet/deals/index.tsx";
+import * as $cabinet_document_complaints from "./routes/cabinet/document-complaints.tsx";
+import * as $cabinet_favorites from "./routes/cabinet/favorites.tsx";
+import * as $cabinet_profile_violations from "./routes/cabinet/profile-violations.tsx";
+import * as $cabinet_profile from "./routes/cabinet/profile.tsx";
+import * as $cabinet_subscription from "./routes/cabinet/subscription.tsx";
+import * as $cabinet_uploads from "./routes/cabinet/uploads.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $Counter from "./islands/Counter.tsx";
+import * as $login from "./routes/login.tsx";
+import * as $register from "./routes/register.tsx";
+import * as $subscriptions from "./routes/subscriptions.tsx";
+import * as $_announcements_islands_announcement_details from "./routes/(announcements)/(_islands)/announcement-details.tsx";
+import * as $_announcements_islands_filter_controls from "./routes/(announcements)/(_islands)/filter-controls.tsx";
+import * as $_announcements_islands_respond_button from "./routes/(announcements)/(_islands)/respond-button.tsx";
+import * as $_database_islands_ad_banner from "./routes/(database)/(_islands)/ad-banner.tsx";
+import * as $_database_islands_filter_panel from "./routes/(database)/(_islands)/filter-panel.tsx";
+import * as $_database_islands_recommendations from "./routes/(database)/(_islands)/recommendations.tsx";
+import * as $cabinet_islands_chat from "./routes/cabinet/(_islands)/chat.tsx";
+import * as $cabinet_islands_cost_adjuster from "./routes/cabinet/(_islands)/cost-adjuster.tsx";
+import * as $cabinet_islands_filter_complaints from "./routes/cabinet/(_islands)/filter-complaints.tsx";
+import * as $cabinet_islands_rating from "./routes/cabinet/(_islands)/rating.tsx";
+import * as $cabinet_islands_upload_work from "./routes/cabinet/(_islands)/upload-work.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/(announcements)/_layout.tsx": $_announcements_layout,
+    "./routes/(announcements)/_middleware.ts": $_announcements_middleware,
+    "./routes/(announcements)/announcements.tsx": $_announcements_announcements,
+    "./routes/(announcements)/announcements/[id].tsx":
+      $_announcements_announcements_id_,
+    "./routes/(database)/_layout.tsx": $_database_layout,
+    "./routes/(database)/database/[id].tsx": $_database_database_id_,
+    "./routes/(database)/database/index.tsx": $_database_database_index,
     "./routes/_404.tsx": $_404,
-    "./routes/_app.tsx": $_app,
-    "./routes/api/joke.ts": $api_joke,
-    "./routes/greet/[name].tsx": $greet_name_,
+    "./routes/_layout.tsx": $_layout,
+    "./routes/_middleware.ts": $_middleware,
+    "./routes/cabinet/_layout.tsx": $cabinet_layout,
+    "./routes/cabinet/_middleware.ts": $cabinet_middleware,
+    "./routes/cabinet/announcement-violations.tsx":
+      $cabinet_announcement_violations,
+    "./routes/cabinet/announcements.tsx": $cabinet_announcements,
+    "./routes/cabinet/complaints.tsx": $cabinet_complaints,
+    "./routes/cabinet/deals/[id].tsx": $cabinet_deals_id_,
+    "./routes/cabinet/deals/index.tsx": $cabinet_deals_index,
+    "./routes/cabinet/document-complaints.tsx": $cabinet_document_complaints,
+    "./routes/cabinet/favorites.tsx": $cabinet_favorites,
+    "./routes/cabinet/profile-violations.tsx": $cabinet_profile_violations,
+    "./routes/cabinet/profile.tsx": $cabinet_profile,
+    "./routes/cabinet/subscription.tsx": $cabinet_subscription,
+    "./routes/cabinet/uploads.tsx": $cabinet_uploads,
     "./routes/index.tsx": $index,
+    "./routes/login.tsx": $login,
+    "./routes/register.tsx": $register,
+    "./routes/subscriptions.tsx": $subscriptions,
   },
   islands: {
-    "./islands/Counter.tsx": $Counter,
+    "./routes/(announcements)/(_islands)/announcement-details.tsx":
+      $_announcements_islands_announcement_details,
+    "./routes/(announcements)/(_islands)/filter-controls.tsx":
+      $_announcements_islands_filter_controls,
+    "./routes/(announcements)/(_islands)/respond-button.tsx":
+      $_announcements_islands_respond_button,
+    "./routes/(database)/(_islands)/ad-banner.tsx":
+      $_database_islands_ad_banner,
+    "./routes/(database)/(_islands)/filter-panel.tsx":
+      $_database_islands_filter_panel,
+    "./routes/(database)/(_islands)/recommendations.tsx":
+      $_database_islands_recommendations,
+    "./routes/cabinet/(_islands)/chat.tsx": $cabinet_islands_chat,
+    "./routes/cabinet/(_islands)/cost-adjuster.tsx":
+      $cabinet_islands_cost_adjuster,
+    "./routes/cabinet/(_islands)/filter-complaints.tsx":
+      $cabinet_islands_filter_complaints,
+    "./routes/cabinet/(_islands)/rating.tsx": $cabinet_islands_rating,
+    "./routes/cabinet/(_islands)/upload-work.tsx": $cabinet_islands_upload_work,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

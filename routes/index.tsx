@@ -1,25 +1,34 @@
-import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
+import { RouteContext } from "$fresh/server.ts";
+import { defineRoute } from "$fresh/server.ts";
 
-export default function Home() {
-  const count = useSignal(3);
+export default defineRoute((req, ctx: RouteContext) => {
+  const { isAuthenticated } = ctx.state as { isAuthenticated: boolean };
+
   return (
-    <div class="px-4 py-8 mx-auto bg-[#86efac]">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <img
-          class="my-6"
-          src="/logo.svg"
-          width="128"
-          height="128"
-          alt="the Fresh logo: a sliced lemon dripping with juice"
-        />
-        <h1 class="text-4xl font-bold">Welcome to Fresh</h1>
-        <p class="my-4">
-          Try updating this message in the
-          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
-        </p>
-        <Counter count={count} />
+    <div class="home">
+      <h2>Welcome to IsPi!</h2>
+      <p>
+        Your platform for ordering academic works from teachers or exploring
+        ready-made materials in our database.
+      </p>
+      <div class="promo">
+        <div>
+          <h3>Order Custom Work</h3>
+          <p>Need a coursework or essay? Create an announcement!</p>
+          {!isAuthenticated && <a href="/register">Register Now</a>}
+          {isAuthenticated && <a href="/cabinet/announcements">Order Now</a>}
+        </div>
+        <div>
+          <h3>Explore Database</h3>
+          <p>Browse coursework, notes, and more for free!</p>
+          <a href="/database">View Files</a>
+        </div>
+        <div>
+          <h3>Premium Access</h3>
+          <p>Unlock ad-free experience and downloads with a subscription.</p>
+          <a href="/subscriptions">Learn More</a>
+        </div>
       </div>
     </div>
   );
-}
+});
