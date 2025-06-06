@@ -1,8 +1,12 @@
 import { defineLayout } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import SearchBar from "./(_components)/search-bar.tsx";
+import SearchBar from "./(_islands)/search-bar.tsx";
+import FilterPanel from "./(_islands)/filter-panel.tsx";
 
 export default defineLayout((req, ctx) => {
+  const isMainDatabasePage = req.url.includes("/database") &&
+    !req.url.match(/\/database\/\d+/);
+
   return (
     <div>
       <Head>
@@ -10,10 +14,14 @@ export default defineLayout((req, ctx) => {
       </Head>
       <div class="database-layout">
         <h2>Database</h2>
-        <SearchBar />
-        <div class="filters">
-          <p>Filters will be here (interactive via island)</p>
-        </div>
+
+        {isMainDatabasePage && (
+          <>
+            <SearchBar />
+            <FilterPanel />
+          </>
+        )}
+
         <ctx.Component />
       </div>
     </div>

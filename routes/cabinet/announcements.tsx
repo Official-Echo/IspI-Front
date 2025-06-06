@@ -1,7 +1,8 @@
 import { defineRoute, RouteContext } from "$fresh/server.ts";
-import AnnouncementCard from "../(announcements)/(_components)/announcement-card.tsx";
+import AnnouncementManager from "./(_islands)/announcement-manager.tsx";
+import type { Post } from "../../types/basic.ts";
 
-export default defineRoute(async (req, ctx: RouteContext) => {
+export default defineRoute(async (req, ctx) => {
   const { user } = ctx.state as { user: { id: number; role: string } | null };
 
   if (user?.role === "teacher") {
@@ -16,6 +17,7 @@ export default defineRoute(async (req, ctx: RouteContext) => {
   return (
     <div class="cabinet-announcements">
       <h3>Your Announcements</h3>
+
       <form action="/api/create-announcement" method="POST">
         <label>
           Title: <input type="text" name="description" required />
@@ -38,34 +40,28 @@ export default defineRoute(async (req, ctx: RouteContext) => {
         </label>
         <button type="submit">Create</button>
       </form>
-      <div class="announcement-list">
-        {announcements.map((ann: any) => (
-          <AnnouncementCard
-            key={ann.id}
-            id={ann.id}
-            workType={ann.work_type}
-            university={ann.university}
-            subjectArea={ann.subject_area}
-            description={ann.description}
-            initialPrice={ann.initial_price}
-            creationDate={ann.creation_date}
-          />
-        ))}
-      </div>
+
+      <AnnouncementManager announcements={announcements} />
     </div>
   );
 });
 
-async function fetchUserAnnouncements(userId: number | undefined) {
+async function fetchUserAnnouncements(
+  userId: number | undefined,
+): Promise<(Post & { response_count: number; status: string })[]> {
   return [
     {
-      id: 1,
+      post_id: 1,
+      student_id: userId || 1,
+      student_name: "John Doe",
       work_type: "coursework",
       university: "Sample Uni",
       subject_area: "Law",
-      description: "My coursework",
+      description: "My coursework on contract law",
       initial_price: 500,
       creation_date: new Date(),
+      response_count: 3,
+      status: "active",
     },
   ];
 }

@@ -23,7 +23,7 @@ export default function AnnouncementCard({
       <p>Subject: {subjectArea}</p>
       <p>Price: {initialPrice}</p>
       <p>Created: {creationDate.toLocaleDateString()}</p>
-      <a href={`/announcements/${id}`}>View</a>
+      <a href={`/announcements?id=${id}#announcement-${id}`}>View Details</a>
     </div>
   );
 }

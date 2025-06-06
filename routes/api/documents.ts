@@ -1,12 +1,6 @@
-import { defineRoute, RouteContext } from "$fresh/server.ts";
-import DocumentList from "../(_islands)/document-list.tsx";
+import { defineRoute } from "$fresh/server.ts";
 
-export default defineRoute(async (req, ctx: RouteContext) => {
-  const { isAuthenticated, user } = ctx.state as {
-    isAuthenticated: boolean;
-    user: { subscription: boolean } | null;
-  };
-
+export default defineRoute(async (req, ctx) => {
   const url = new URL(req.url);
   const filters = {
     workType: url.searchParams.get("workType") || "",
@@ -21,25 +15,7 @@ export default defineRoute(async (req, ctx: RouteContext) => {
   };
 
   const documents = await fetchDocuments({ filters, limit: 20 });
-
-  return (
-    <div class="database">
-      <h3>Search Documents</h3>
-
-      <DocumentList
-        initialDocuments={documents}
-        isAuthenticated={isAuthenticated}
-        userSubscription={user?.subscription ?? false}
-      />
-
-      {!isAuthenticated && (
-        <p>
-          <a href="/register">Register</a> or{" "}
-          <a href="/subscriptions">get a subscription</a> to download and rate!
-        </p>
-      )}
-    </div>
-  );
+  return Response.json(documents);
 });
 
 async function fetchDocuments(
@@ -104,12 +80,20 @@ async function fetchDocuments(
     },
   ];
 
-  if (filters.query) {
+  console.log("API: Filtering with query:", filters.query);
+
+  if (filters.query && filters.query.trim()) {
     const query = filters.query.toLowerCase();
     documents = documents.filter((doc) =>
       doc.name.toLowerCase().includes(query) ||
       doc.work_type.toLowerCase().includes(query) ||
       doc.subject_area.toLowerCase().includes(query)
+    );
+    console.log("API: After search filtering:", documents.length, "documents");
+  } else {
+    console.log(
+      "API: No search query - showing all documents:",
+      documents.length,
     );
   }
 

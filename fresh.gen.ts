@@ -12,15 +12,22 @@ import * as $_database_database_index from "./routes/(database)/database/index.t
 import * as $_404 from "./routes/_404.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_any_ from "./routes/api/[...any].ts";
+import * as $api_documents from "./routes/api/documents.ts";
+import * as $api_login from "./routes/api/login.ts";
+import * as $api_logout from "./routes/api/logout.ts";
+import * as $api_register from "./routes/api/register.ts";
 import * as $cabinet_layout from "./routes/cabinet/_layout.tsx";
 import * as $cabinet_middleware from "./routes/cabinet/_middleware.ts";
 import * as $cabinet_announcement_violations from "./routes/cabinet/announcement-violations.tsx";
 import * as $cabinet_announcements from "./routes/cabinet/announcements.tsx";
+import * as $cabinet_announcements_id_ from "./routes/cabinet/announcements/[id].tsx";
 import * as $cabinet_complaints from "./routes/cabinet/complaints.tsx";
 import * as $cabinet_deals_id_ from "./routes/cabinet/deals/[id].tsx";
 import * as $cabinet_deals_index from "./routes/cabinet/deals/index.tsx";
 import * as $cabinet_document_complaints from "./routes/cabinet/document-complaints.tsx";
 import * as $cabinet_favorites from "./routes/cabinet/favorites.tsx";
+import * as $cabinet_index from "./routes/cabinet/index.tsx";
 import * as $cabinet_profile_violations from "./routes/cabinet/profile-violations.tsx";
 import * as $cabinet_profile from "./routes/cabinet/profile.tsx";
 import * as $cabinet_subscription from "./routes/cabinet/subscription.tsx";
@@ -33,12 +40,19 @@ import * as $_announcements_islands_announcement_details from "./routes/(announc
 import * as $_announcements_islands_filter_controls from "./routes/(announcements)/(_islands)/filter-controls.tsx";
 import * as $_announcements_islands_respond_button from "./routes/(announcements)/(_islands)/respond-button.tsx";
 import * as $_database_islands_ad_banner from "./routes/(database)/(_islands)/ad-banner.tsx";
+import * as $_database_islands_document_list from "./routes/(database)/(_islands)/document-list.tsx";
 import * as $_database_islands_filter_panel from "./routes/(database)/(_islands)/filter-panel.tsx";
 import * as $_database_islands_recommendations from "./routes/(database)/(_islands)/recommendations.tsx";
+import * as $_database_islands_search_bar from "./routes/(database)/(_islands)/search-bar.tsx";
+import * as $cabinet_islands_accept_teacher from "./routes/cabinet/(_islands)/accept-teacher.tsx";
+import * as $cabinet_islands_announcement_manager from "./routes/cabinet/(_islands)/announcement-manager.tsx";
 import * as $cabinet_islands_chat from "./routes/cabinet/(_islands)/chat.tsx";
 import * as $cabinet_islands_cost_adjuster from "./routes/cabinet/(_islands)/cost-adjuster.tsx";
 import * as $cabinet_islands_filter_complaints from "./routes/cabinet/(_islands)/filter-complaints.tsx";
+import * as $cabinet_islands_price_negotiation from "./routes/cabinet/(_islands)/price-negotiation.tsx";
 import * as $cabinet_islands_rating from "./routes/cabinet/(_islands)/rating.tsx";
+import * as $cabinet_islands_reject_teacher from "./routes/cabinet/(_islands)/reject-teacher.tsx";
+import * as $cabinet_islands_teacher_response_manager from "./routes/cabinet/(_islands)/teacher-response-manager.tsx";
 import * as $cabinet_islands_upload_work from "./routes/cabinet/(_islands)/upload-work.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -55,16 +69,23 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_layout.tsx": $_layout,
     "./routes/_middleware.ts": $_middleware,
+    "./routes/api/[...any].ts": $api_any_,
+    "./routes/api/documents.ts": $api_documents,
+    "./routes/api/login.ts": $api_login,
+    "./routes/api/logout.ts": $api_logout,
+    "./routes/api/register.ts": $api_register,
     "./routes/cabinet/_layout.tsx": $cabinet_layout,
     "./routes/cabinet/_middleware.ts": $cabinet_middleware,
     "./routes/cabinet/announcement-violations.tsx":
       $cabinet_announcement_violations,
     "./routes/cabinet/announcements.tsx": $cabinet_announcements,
+    "./routes/cabinet/announcements/[id].tsx": $cabinet_announcements_id_,
     "./routes/cabinet/complaints.tsx": $cabinet_complaints,
     "./routes/cabinet/deals/[id].tsx": $cabinet_deals_id_,
     "./routes/cabinet/deals/index.tsx": $cabinet_deals_index,
     "./routes/cabinet/document-complaints.tsx": $cabinet_document_complaints,
     "./routes/cabinet/favorites.tsx": $cabinet_favorites,
+    "./routes/cabinet/index.tsx": $cabinet_index,
     "./routes/cabinet/profile-violations.tsx": $cabinet_profile_violations,
     "./routes/cabinet/profile.tsx": $cabinet_profile,
     "./routes/cabinet/subscription.tsx": $cabinet_subscription,
@@ -83,16 +104,30 @@ const manifest = {
       $_announcements_islands_respond_button,
     "./routes/(database)/(_islands)/ad-banner.tsx":
       $_database_islands_ad_banner,
+    "./routes/(database)/(_islands)/document-list.tsx":
+      $_database_islands_document_list,
     "./routes/(database)/(_islands)/filter-panel.tsx":
       $_database_islands_filter_panel,
     "./routes/(database)/(_islands)/recommendations.tsx":
       $_database_islands_recommendations,
+    "./routes/(database)/(_islands)/search-bar.tsx":
+      $_database_islands_search_bar,
+    "./routes/cabinet/(_islands)/accept-teacher.tsx":
+      $cabinet_islands_accept_teacher,
+    "./routes/cabinet/(_islands)/announcement-manager.tsx":
+      $cabinet_islands_announcement_manager,
     "./routes/cabinet/(_islands)/chat.tsx": $cabinet_islands_chat,
     "./routes/cabinet/(_islands)/cost-adjuster.tsx":
       $cabinet_islands_cost_adjuster,
     "./routes/cabinet/(_islands)/filter-complaints.tsx":
       $cabinet_islands_filter_complaints,
+    "./routes/cabinet/(_islands)/price-negotiation.tsx":
+      $cabinet_islands_price_negotiation,
     "./routes/cabinet/(_islands)/rating.tsx": $cabinet_islands_rating,
+    "./routes/cabinet/(_islands)/reject-teacher.tsx":
+      $cabinet_islands_reject_teacher,
+    "./routes/cabinet/(_islands)/teacher-response-manager.tsx":
+      $cabinet_islands_teacher_response_manager,
     "./routes/cabinet/(_islands)/upload-work.tsx": $cabinet_islands_upload_work,
   },
   baseUrl: import.meta.url,

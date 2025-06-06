@@ -11,40 +11,49 @@ export async function handler(req: Request, ctx: FreshContext) {
 }
 
 async function checkAuth(req: Request): Promise<boolean> {
-  return req.headers.get("Authorization") === "Bearer example-token";
+  const cookies = req.headers.get("Cookie");
+  return cookies?.includes("auth-token=") || false;
 }
 
 async function fetchUserData(req: Request) {
-  const rand = Math.random() % 3;
-  if (rand === 1) {
-    return {
-      id: Math.random() % 1000,
+  const cookies = req.headers.get("Cookie");
+
+  if (!cookies?.includes("auth-token=")) {
+    return null;
+  }
+
+  const tokenMatch = cookies.match(/auth-token=valid-token-(\d+)/);
+  const userId = tokenMatch ? parseInt(tokenMatch[1]) : null;
+
+  const mockUsers = [
+    {
+      id: 1,
       pib: "John Doe",
-      email: "john@example.com",
+      email: "student@example.com",
       role: "student",
       subscription: true,
       activation_date: new Date(),
       bank_card_number: "1234-5678-9012-3456",
-    };
-  } else if (rand === 2) {
-    return {
+    },
+    {
       id: 2,
       pib: "Jane Smith",
-      email: "jane@example.com",
+      email: "teacher@example.com",
       role: "teacher",
       subscription: false,
       activation_date: new Date(),
       bank_card_number: "9876-5432-1098-7654",
-    };
-  } else {
-    return {
+    },
+    {
       id: 3,
       pib: "Vaas Montenegro",
-      email: "vaas@example.org",
+      email: "moderator@example.com",
       role: "moderator",
       subscription: true,
       activation_date: new Date(),
       bank_card_number: "1111-2222-3333-4444",
-    };
-  }
+    },
+  ];
+
+  return mockUsers.find((user) => user.id === userId) || null;
 }

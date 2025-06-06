@@ -5,6 +5,6 @@ export default defineRoute(async (req, ctx: RouteContext) => {
 
   return new Response(null, {
     status: 302,
-    headers: { Location: `/announcements#announcement-${id}` },
+    headers: { Location: `/cabinet/announcements?id=${id}#announcement-${id}` },
   });
 });

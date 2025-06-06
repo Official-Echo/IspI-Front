@@ -1,9 +1,18 @@
 import { defineRoute } from "$fresh/server.ts";
 
-export default defineRoute(() => {
+export default defineRoute((req, ctx) => {
+  const url = new URL(req.url);
+  const error = url.searchParams.get("error");
+
   return (
     <div class="register-page">
       <h3>Register</h3>
+      {error === "exists" && (
+        <p style="color: red;">User with this email already exists!</p>
+      )}
+      {error === "failed" && (
+        <p style="color: red;">Registration failed. Please try again.</p>
+      )}
       <form action="/api/register" method="POST">
         <label>
           Name:
