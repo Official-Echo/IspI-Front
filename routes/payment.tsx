@@ -1,0 +1,161 @@
+import { defineRoute, RouteContext } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import PaymentForm from "../islands/payment-form.tsx";
+
+export default defineRoute((req, ctx: RouteContext) => {
+  const { isAuthenticated, user } = ctx.state as {
+    isAuthenticated: boolean;
+    user: { pib: string; role: string; subscription: boolean } | null;
+  };
+
+  const url = new URL(req.url);
+  const plan = url.searchParams.get("plan") || "librarian";
+  const amount = url.searchParams.get("amount") || "9.99";
+
+  const plans = {
+    patron: {
+      name: "Patron",
+      price: "0.00",
+      features: [
+        "Upload 10+ documents for free access",
+        "10 downloads/day for a week",
+        "Basic access",
+        "Earn through contributions",
+      ],
+    },
+    librarian: {
+      name: "Librarian",
+      price: "9.99",
+      features: [
+        "Unlimited document downloads",
+        "Priority support",
+        "Monthly billing",
+        "Full database access",
+      ],
+    },
+    premium: {
+      name: "Protection+",
+      price: "19.99",
+      features: [
+        "Ad-free experience",
+        "Unlimited downloads",
+        "Private work uploads",
+        "Premium support",
+        "Priority processing",
+      ],
+    },
+
+    basic: {
+      name: "Librarian",
+      price: "9.99",
+      features: [
+        "Unlimited document downloads",
+        "Priority support",
+        "Monthly billing",
+        "Full database access",
+      ],
+    },
+  };
+
+  const selectedPlan = plans[plan as keyof typeof plans] || plans.librarian;
+
+  return (
+    <>
+      <Head>
+        <title>Payment - Complete Your Purchase</title>
+      </Head>
+      <div class="payment-page">
+        <div class="payment-container">
+          <div class="payment-header">
+            <h1>Complete Your Purchase</h1>
+            <p>Secure payment powered by industry-standard encryption</p>
+          </div>
+
+          <div class="payment-content">
+            <div class="order-summary">
+              <h2>Order Summary</h2>
+              <div class="plan-details">
+                <div class="plan-info">
+                  <h3>{selectedPlan.name}</h3>
+                  <div class="plan-features">
+                    {selectedPlan.features.map((feature) => (
+                      <div class="feature-item">
+                        <span class="checkmark">✓</span>
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="plan-pricing">
+                  <div class="price-line">
+                    <span>Subscription</span>
+                    <span>${selectedPlan.price}/month</span>
+                  </div>
+                  <div class="price-line">
+                    <span>Tax</span>
+                    <span>$0.00</span>
+                  </div>
+                  <div class="price-line total">
+                    <span>Total</span>
+                    <span>${selectedPlan.price}/month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <PaymentForm
+              plan={plan}
+              selectedPlan={selectedPlan}
+              userEmail={user?.pib || ""}
+            />
+          </div>
+
+          <div class="alternative-payments">
+            <h3>Alternative Payment Methods</h3>
+            <div class="alt-payment-buttons">
+              <button class="alt-payment-btn paypal-btn" disabled>
+                <span class="btn-icon">🅿️</span>
+                Pay with PayPal
+                <span class="btn-status">Coming Soon</span>
+              </button>
+              <button class="alt-payment-btn apple-btn" disabled>
+                <span class="btn-icon">🍎</span>
+                Apple Pay
+                <span class="btn-status">Coming Soon</span>
+              </button>
+              <button class="alt-payment-btn google-btn" disabled>
+                <span class="btn-icon">🅖</span>
+                Google Pay
+                <span class="btn-status">Coming Soon</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="security-features">
+            <div class="security-item">
+              <span class="security-icon">🔒</span>
+              <div>
+                <h4>SSL Encrypted</h4>
+                <p>256-bit encryption</p>
+              </div>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">🛡️</span>
+              <div>
+                <h4>PCI Compliant</h4>
+                <p>Industry standard security</p>
+              </div>
+            </div>
+            <div class="security-item">
+              <span class="security-icon">💳</span>
+              <div>
+                <h4>Secure Processing</h4>
+                <p>Protected by Stripe</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+});

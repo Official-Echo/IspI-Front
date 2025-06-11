@@ -23,7 +23,7 @@ export default defineLayout((req, ctx) => {
                 <a href="/announcements">Announcements</a>
               )}
               {isAuthenticated && <a href="/cabinet">Cabinet</a>}
-              <a href="/subscriptions">Subscriptions</a>
+              {!isAuthenticated && <a href="/subscriptions">Subscriptions</a>}
               {isAuthenticated ? <a href="/api/logout">Log Out</a> : (
                 <>
                   <a href="/login">Login</a>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import Chat from "./chat.tsx";
 import CostAdjuster from "./cost-adjuster.tsx";
+import PopupChat from "./popup-chat.tsx";
 
 interface TeacherResponse {
   id: number;
@@ -31,6 +32,9 @@ export default function TeacherResponsesManager({
   );
   const [existingDeal, setExistingDeal] = useState<ExistingDeal | null>(null);
   const [loading, setLoading] = useState(true);
+  const [chatOpen, setChatOpen] = useState<
+    { teacherId: number; teacherName: string } | null
+  >(null);
 
   useEffect(() => {
     fetchData();
@@ -142,12 +146,22 @@ export default function TeacherResponsesManager({
                       key={response.id}
                       response={response}
                       onAction={handleTeacherAction}
+                      setChatOpen={setChatOpen}
                     />
                   ))}
                 </div>
               )}
           </div>
         )}
+      {chatOpen && (
+        <PopupChat
+          announcementId={announcementId}
+          teacherId={chatOpen.teacherId}
+          teacherName={chatOpen.teacherName}
+          userRole="student"
+          onClose={() => setChatOpen(null)}
+        />
+      )}
     </div>
   );
 }
@@ -155,6 +169,7 @@ export default function TeacherResponsesManager({
 function TeacherResponseCard({
   response,
   onAction,
+  setChatOpen,
 }: {
   response: TeacherResponse;
   onAction: (
@@ -162,6 +177,9 @@ function TeacherResponseCard({
     responseId: number,
     teacherId?: number,
     price?: number,
+  ) => void;
+  setChatOpen: (
+    chatOpen: { teacherId: number; teacherName: string } | null,
   ) => void;
 }) {
   const [isAccepting, setIsAccepting] = useState(false);
@@ -223,11 +241,18 @@ function TeacherResponseCard({
 
       <div style="padding: 15px;">
         <h6 style="margin: 0 0 10px 0; color: #495057;">
-          💬 Price Negotiation:
+          💬 Quick Negotiation:
         </h6>
-
-        <Chat dealId={response.id} />
-
+        <button
+          onClick={() =>
+            setChatOpen({
+              teacherId: response.teacher_id,
+              teacherName: response.teacher_name,
+            })}
+          style="width: 100%; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 15px;"
+        >
+          💬 Open Chat
+        </button>
         <div style="display: flex; gap: 10px; margin-top: 15px;">
           <button
             onClick={handleAccept}

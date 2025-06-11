@@ -19,9 +19,11 @@ export default defineLayout((req, ctx) => {
           Favorites
         </a>
         <a href="/cabinet/uploads" f-partial="/cabinet/uploads">Uploads</a>
-        <a href="/cabinet/announcements" f-partial="/cabinet/announcements">
-          Announcements
-        </a>
+        {user?.role !== "teacher" && (
+          <a href="/cabinet/announcements" f-partial="/cabinet/announcements">
+            Announcements
+          </a>
+        )}
         <a href="/cabinet/deals" f-partial="/cabinet/deals">Deals</a>
         {user?.role === "moderator" && (
           <>

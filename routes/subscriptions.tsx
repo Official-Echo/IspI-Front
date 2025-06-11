@@ -32,7 +32,7 @@ export default defineRoute((req, ctx) => {
             <strong>Free</strong> - Earn through contributions
           </p>
           {isAuthenticated
-            ? <a href="/cabinet/subscription">Activate</a>
+            ? <a href="/cabinet/subscription?change_to=Patron">Activate</a>
             : <a href="/register">Register to Activate</a>}
         </div>
 
@@ -43,7 +43,7 @@ export default defineRoute((req, ctx) => {
             <strong>$9.99/month</strong>
           </p>
           {isAuthenticated
-            ? <a href="/cabinet/subscription">Subscribe</a>
+            ? <a href="/payment?plan=librarian&amount=9.99">Subscribe Now</a>
             : <a href="/register">Register to Subscribe</a>}
         </div>
 
@@ -56,7 +56,7 @@ export default defineRoute((req, ctx) => {
             <strong>$19.99/month</strong>
           </p>
           {isAuthenticated
-            ? <a href="/cabinet/subscription">Subscribe</a>
+            ? <a href="/payment?plan=premium&amount=19.99">Subscribe Now</a>
             : <a href="/register">Register to Subscribe</a>}
         </div>
       </div>
