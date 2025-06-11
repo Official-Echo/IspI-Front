@@ -17,6 +17,7 @@ export default defineLayout((req, ctx) => {
     <html>
       <Head>
         <link rel="stylesheet" href="/styles.css" />
+		<link rel="icon" href="/Primary Logo.svg" type="image/x-icon" />
       </Head>
       <body f-client-nav>
         <div class="container">
