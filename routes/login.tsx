@@ -14,7 +14,7 @@ export default defineRoute((req, ctx) => {
       {success === "registered" && (
         <p style="color: green;">Registration successful! Please log in.</p>
       )}
-      <form action="/api/login" method="POST">
+      <form action="/api/login" method="POST" f-client-nav={false}>
         <label>
           Email:
           <input type="email" name="email" required />

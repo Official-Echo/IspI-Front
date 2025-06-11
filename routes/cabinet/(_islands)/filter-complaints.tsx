@@ -7,10 +7,10 @@ export default function FilterComplaints() {
   const handleFilter = (e: Event) => {
     e.preventDefault();
 
-    const url = new URL(window.location.href);
+    const url = new URL(globalThis.location.href);
     url.searchParams.set("plaintiff", plaintiff);
     url.searchParams.set("status", status);
-    window.location.href = url.toString();
+    globalThis.location.href = url.toString();
   };
 
   return (

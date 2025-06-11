@@ -3,61 +3,76 @@ import { Head } from "$fresh/runtime.ts";
 import PaymentForm from "../islands/payment-form.tsx";
 
 export default defineRoute((req, ctx: RouteContext) => {
+  console.log("Payment page: Starting render");
+
   const { isAuthenticated, user } = ctx.state as {
     isAuthenticated: boolean;
     user: { pib: string; role: string; subscription: boolean } | null;
   };
 
+  console.log("Payment page: User state:", { isAuthenticated, user });
+
   const url = new URL(req.url);
   const plan = url.searchParams.get("plan") || "librarian";
   const amount = url.searchParams.get("amount") || "9.99";
 
+  console.log("Payment page: URL params:", { plan, amount });
+
   const plans = {
     patron: {
-      name: "Patron",
+      name: "Меценат",
       price: "0.00",
       features: [
         "Upload 10+ documents for free access",
         "10 downloads/day for a week",
-        "Basic access",
+        "Basic access with ads",
         "Earn through contributions",
       ],
     },
     librarian: {
-      name: "Librarian",
+      name: "Бібліотекар",
       price: "9.99",
       features: [
         "Unlimited document downloads",
         "Priority support",
         "Monthly billing",
-        "Full database access",
+        "No advertisements",
       ],
     },
     premium: {
-      name: "Protection+",
+      name: "Захист+",
       price: "19.99",
       features: [
-        "Ad-free experience",
+        "No advertisements",
         "Unlimited downloads",
         "Private work uploads",
         "Premium support",
         "Priority processing",
       ],
     },
-
     basic: {
-      name: "Librarian",
+      name: "Бібліотекар",
       price: "9.99",
       features: [
         "Unlimited document downloads",
         "Priority support",
         "Monthly billing",
-        "Full database access",
+        "No advertisements",
       ],
     },
   };
 
   const selectedPlan = plans[plan as keyof typeof plans] || plans.librarian;
+
+  console.log("Payment page: Selected plan:", selectedPlan);
+  console.log("Payment page: About to render PaymentForm with props:", {
+    plan,
+    selectedPlan,
+    userEmail: user?.pib || "",
+  });
+
+  console.log("Payment page: PaymentForm component:", PaymentForm);
+  console.log("Payment page: PaymentForm type:", typeof PaymentForm);
 
   return (
     <>
@@ -113,17 +128,17 @@ export default defineRoute((req, ctx: RouteContext) => {
           <div class="alternative-payments">
             <h3>Alternative Payment Methods</h3>
             <div class="alt-payment-buttons">
-              <button class="alt-payment-btn paypal-btn" disabled>
+              <button type="button" class="alt-payment-btn paypal-btn" disabled>
                 <span class="btn-icon">🅿️</span>
                 Pay with PayPal
                 <span class="btn-status">Coming Soon</span>
               </button>
-              <button class="alt-payment-btn apple-btn" disabled>
+              <button type="button" class="alt-payment-btn apple-btn" disabled>
                 <span class="btn-icon">🍎</span>
                 Apple Pay
                 <span class="btn-status">Coming Soon</span>
               </button>
-              <button class="alt-payment-btn google-btn" disabled>
+              <button type="button" class="alt-payment-btn google-btn" disabled>
                 <span class="btn-icon">🅖</span>
                 Google Pay
                 <span class="btn-status">Coming Soon</span>

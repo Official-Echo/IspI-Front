@@ -125,7 +125,7 @@ export default function PopupChat({
 
     if (response.ok) {
       alert("Deal accepted! Redirecting to your deals page...");
-      window.location.href = "/cabinet/deals";
+      globalThis.location.href = "/cabinet/deals";
     } else {
       alert("Failed to accept deal. Please try again.");
     }
@@ -137,7 +137,7 @@ export default function PopupChat({
         <div class="popup-chat">
           <div class="chat-header">
             <h3>Loading...</h3>
-            <button class="close-btn" onClick={onClose}>✕</button>
+            <button type="button" class="close-btn" onClick={onClose}>✕</button>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default function PopupChat({
       <div class="popup-chat">
         <div class="chat-header">
           <h3>💬 Chat with {teacherName}</h3>
-          <button class="close-btn" onClick={onClose}>✕</button>
+          <button type="button" class="close-btn" onClick={onClose}>✕</button>
         </div>
 
         <div class="chat-content">
@@ -199,6 +199,7 @@ export default function PopupChat({
                         </span>
                         {msg.sender === "teacher" && userRole === "student" && (
                           <button
+                            type="submit"
                             class="accept-deal-btn"
                             onClick={() =>
                               acceptDeal(msg.id, msg.suggested_price!)}

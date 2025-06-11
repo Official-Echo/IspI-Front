@@ -15,22 +15,33 @@ export default defineRoute(async (req, ctx) => {
 
   console.log(`Changing subscription for user ${user.id} to: ${newPlan}`);
 
-  if (newPlan === "Patron") {
-    console.log(`Updated user ${user.id} to Patron plan`);
-
+  if (newPlan === "Меценат") {
+    console.log(`Updated user ${user.id} to Меценат plan`);
     return Response.redirect(
-      "/cabinet/subscription?payment_success=true&plan=Patron",
+      "/cabinet/subscription?payment_success=true&plan=Меценат",
     );
   }
 
-  if (newPlan === "Librarian") {
-    return Response.redirect(
-      "/payment?plan=librarian&amount=9.99&return_url=/cabinet/subscription",
-    );
-  } else if (newPlan === "Protection+") {
-    return Response.redirect(
-      "/payment?plan=premium&amount=19.99&return_url=/cabinet/subscription",
-    );
+  if (newPlan === "Бібліотекар") {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: new URL(
+          "/payment?plan=librarian&amount=9.99&return_url=/cabinet/subscription",
+          new URL(req.url).origin,
+        ).toString(),
+      },
+    });
+  } else if (newPlan === "Захист+") {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: new URL(
+          "/payment?plan=premium&amount=19.99&return_url=/cabinet/subscription",
+          new URL(req.url).origin,
+        ).toString(),
+      },
+    });
   }
 
   return Response.redirect("/cabinet/subscription");

@@ -21,7 +21,7 @@ export default function BackButton() {
       class="back-button"
       onClick={handleBack}
     >
-      ← Back to Database
+      ← Back
     </button>
   );
 }

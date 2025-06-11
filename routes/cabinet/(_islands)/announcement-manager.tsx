@@ -70,6 +70,7 @@ export default function AnnouncementManager({
             </p>
             <p>Teacher Responses: {ann.response_count}</p>
             <button
+              type="button"
               onClick={() =>
                 handleViewResponses(ann.post_id)}
               style="background: #3498db; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;"
@@ -86,6 +87,7 @@ export default function AnnouncementManager({
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <h4>📋 Managing: {ann.description}</h4>
                 <button
+                  type="button"
                   onClick={handleClose}
                   style="background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0;"
                 >

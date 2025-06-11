@@ -1,3 +1,5 @@
+export type Subscription = "Free" | "Меценат" | "Бібліотекар" | "Захист+";
+
 export interface Post {
   post_id: number;
   student_id: number;

@@ -24,6 +24,7 @@ import * as $api_login from "./routes/api/login.ts";
 import * as $api_logout from "./routes/api/logout.ts";
 import * as $api_process_payment from "./routes/api/process-payment.ts";
 import * as $api_register from "./routes/api/register.ts";
+import * as $api_view_document_id_ from "./routes/api/view-document/[id].ts";
 import * as $cabinet_layout from "./routes/cabinet/_layout.tsx";
 import * as $cabinet_middleware from "./routes/cabinet/_middleware.ts";
 import * as $cabinet_announcement_violations from "./routes/cabinet/announcement-violations.tsx";
@@ -54,6 +55,7 @@ import * as $_database_islands_ad_banner from "./routes/(database)/(_islands)/ad
 import * as $_database_islands_back_button from "./routes/(database)/(_islands)/back-button.tsx";
 import * as $_database_islands_document_list from "./routes/(database)/(_islands)/document-list.tsx";
 import * as $_database_islands_filter_panel from "./routes/(database)/(_islands)/filter-panel.tsx";
+import * as $_database_islands_pdf_viewer from "./routes/(database)/(_islands)/pdf-viewer.tsx";
 import * as $_database_islands_recommendations from "./routes/(database)/(_islands)/recommendations.tsx";
 import * as $_database_islands_search_bar from "./routes/(database)/(_islands)/search-bar.tsx";
 import * as $cabinet_islands_accept_teacher from "./routes/cabinet/(_islands)/accept-teacher.tsx";
@@ -96,6 +98,7 @@ const manifest = {
     "./routes/api/logout.ts": $api_logout,
     "./routes/api/process-payment.ts": $api_process_payment,
     "./routes/api/register.ts": $api_register,
+    "./routes/api/view-document/[id].ts": $api_view_document_id_,
     "./routes/cabinet/_layout.tsx": $cabinet_layout,
     "./routes/cabinet/_middleware.ts": $cabinet_middleware,
     "./routes/cabinet/announcement-violations.tsx":
@@ -136,6 +139,8 @@ const manifest = {
       $_database_islands_document_list,
     "./routes/(database)/(_islands)/filter-panel.tsx":
       $_database_islands_filter_panel,
+    "./routes/(database)/(_islands)/pdf-viewer.tsx":
+      $_database_islands_pdf_viewer,
     "./routes/(database)/(_islands)/recommendations.tsx":
       $_database_islands_recommendations,
     "./routes/(database)/(_islands)/search-bar.tsx":

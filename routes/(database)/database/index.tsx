@@ -1,10 +1,11 @@
 import { defineRoute, RouteContext } from "$fresh/server.ts";
 import DocumentList from "../(_islands)/document-list.tsx";
+import type { Subscription } from "../../../types/basic.ts";
 
 export default defineRoute(async (req, ctx: RouteContext) => {
   const { isAuthenticated, user } = ctx.state as {
     isAuthenticated: boolean;
-    user: { subscription: boolean } | null;
+    user: { subscription: Subscription } | null;
   };
 
   const url = new URL(req.url);
@@ -29,7 +30,7 @@ export default defineRoute(async (req, ctx: RouteContext) => {
       <DocumentList
         initialDocuments={documents}
         isAuthenticated={isAuthenticated}
-        userSubscription={user?.subscription ?? false}
+        userSubscription={user?.subscription || "Free"}
       />
 
       {!isAuthenticated && (

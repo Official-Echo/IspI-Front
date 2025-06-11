@@ -244,6 +244,7 @@ function TeacherResponseCard({
           💬 Quick Negotiation:
         </h6>
         <button
+          type="type"
           onClick={() =>
             setChatOpen({
               teacherId: response.teacher_id,
@@ -255,6 +256,7 @@ function TeacherResponseCard({
         </button>
         <div style="display: flex; gap: 10px; margin-top: 15px;">
           <button
+            type="submit"
             onClick={handleAccept}
             disabled={isAccepting}
             style="flex: 1; background: linear-gradient(135deg, #27ae60, #219a52); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer;"
@@ -267,6 +269,7 @@ function TeacherResponseCard({
           </button>
 
           <button
+            type="submit"
             onClick={handleReject}
             disabled={isRejecting}
             style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px 16px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;"

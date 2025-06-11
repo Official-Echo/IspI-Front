@@ -37,7 +37,7 @@ export default function AcceptTeacher({
     });
 
     if (result.ok) {
-      window.location.reload();
+      globalThis.location.reload();
     } else {
       alert("Failed to accept teacher. Please try again.");
       setIsSubmitting(false);
@@ -46,6 +46,7 @@ export default function AcceptTeacher({
 
   return (
     <button
+      type="submit"
       onClick={handleAccept}
       disabled={isSubmitting}
       style="width: 100%; background: linear-gradient(135deg, #27ae60, #219a52); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer;"

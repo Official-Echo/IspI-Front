@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import DocumentCard from "../(_components)/document-card.tsx";
+import type { Subscription } from "../../../types/basic.ts";
 
 export default function DocumentList({
   initialDocuments,
@@ -8,7 +9,7 @@ export default function DocumentList({
 }: {
   initialDocuments: any[];
   isAuthenticated: boolean;
-  userSubscription: boolean;
+  userSubscription: Subscription;
 }) {
   const [documents, setDocuments] = useState(initialDocuments);
   const [loading, setLoading] = useState(false);
@@ -162,7 +163,10 @@ export default function DocumentList({
             workType={doc.work_type}
             subjectArea={doc.subject_area}
             uploadDate={new Date(doc.upload_date)}
-            canInteract={isAuthenticated && userSubscription}
+            canInteract={isAuthenticated &&
+              (userSubscription === "Бібліотекар" ||
+                userSubscription === "Захист+" ||
+                userSubscription === "Меценат")}
           />
         ))}
       </div>

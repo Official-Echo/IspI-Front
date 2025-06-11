@@ -17,7 +17,11 @@ export default function RespondButton(
     <div class="respond-button">
       {responded
         ? <p>Response submitted!</p>
-        : <button onClick={handleRespond}>Respond to Announcement</button>}
+        : (
+          <button type="button" onClick={handleRespond}>
+            Respond to Announcement
+          </button>
+        )}
     </div>
   );
 }

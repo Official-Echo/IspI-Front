@@ -15,15 +15,18 @@ export default function PaymentForm(
   { plan, selectedPlan, userEmail }: PaymentFormProps,
 ) {
   const isProcessing = useSignal(false);
+  console.log("PaymentForm: Component rendering with props:", {
+    plan,
+    selectedPlan,
+    userEmail,
+  });
 
-  
   useEffect(() => {
     const savedData = localStorage.getItem("payment_form_data");
     if (savedData) {
       try {
         const data = JSON.parse(savedData);
 
-        
         const form = document.getElementById("payment-form") as HTMLFormElement;
         if (form) {
           Object.keys(data).forEach((key) => {
@@ -46,7 +49,6 @@ export default function PaymentForm(
     }
   }, []);
 
-  
   const saveFormData = () => {
     const form = document.getElementById("payment-form") as HTMLFormElement;
     if (!form) return;
@@ -54,7 +56,6 @@ export default function PaymentForm(
     const formData = new FormData(form);
     const data: Record<string, string> = {};
 
-    
     for (const [key, value] of formData.entries()) {
       if (key !== "card_number" && key !== "cvv" && key !== "expiry") {
         data[key] = value as string;
@@ -65,7 +66,6 @@ export default function PaymentForm(
     console.log("Saved form data to localStorage");
   };
 
-  
   const clearSavedData = () => {
     localStorage.removeItem("payment_form_data");
     console.log("Cleared saved form data");
@@ -75,13 +75,11 @@ export default function PaymentForm(
     const form = document.getElementById("payment-form") as HTMLFormElement;
     if (!form) return;
 
-    
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    
     saveFormData();
 
     isProcessing.value = true;
@@ -115,13 +113,12 @@ export default function PaymentForm(
       }
 
       if (response.redirected) {
-        
         if (response.url.includes("payment-success")) {
-          clearSavedData(); 
+          clearSavedData();
         }
         globalThis.location.href = response.url;
       } else if (response.ok) {
-        clearSavedData(); 
+        clearSavedData();
         globalThis.location.href = `/payment-success?plan=${plan}`;
       } else {
         console.error("Payment failed with status:", response.status);

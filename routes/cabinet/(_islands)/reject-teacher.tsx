@@ -20,7 +20,7 @@ export default function RejectTeacher({ responseId }: { responseId: number }) {
     });
 
     if (result.ok) {
-      window.location.reload();
+      globalThis.location.reload();
     } else {
       alert("Failed to reject teacher. Please try again.");
       setIsSubmitting(false);
@@ -29,6 +29,7 @@ export default function RejectTeacher({ responseId }: { responseId: number }) {
 
   return (
     <button
+      type="submit"
       onClick={handleReject}
       disabled={isSubmitting}
       style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px 16px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;"
